@@ -1,0 +1,71 @@
+
+@import '../color.css';
+
+@media only screen and (min-width: 440px) {
+  .chart_title {
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 14px;
+    margin: 5px 20px;
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .chart_title {
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 13px;
+    margin: 5px 10px;
+  }
+}
+
+.legend_row {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  margin: 3px 0;
+}
+
+.legen_icon {
+  font-size: 22px;
+  margin-right: 2px;
+}
+
+.legend_value {
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.legend_label {
+  font-size: 15px;
+  font-weight: 800;
+  margin-left: 1px;
+}
+
+.legend4_row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.legend_dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+}
+
+.legend4_value {
+  font-size: 14px;
+}
+
+.legend1_dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+}

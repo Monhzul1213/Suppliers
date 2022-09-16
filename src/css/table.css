@@ -44,13 +44,10 @@
 }
 
 .table_header_text {
-  /* color: var(--text-color2); */
   color: var(--text-color);
-  /* text-align: left; */
   text-align: center;
   padding: var(--padding-gap2);
-  /* font-size: 14px; */
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   position: sticky;
   top: 0;
@@ -98,7 +95,7 @@
 
 .table_cell_text {
   color: var(--text-color);
-  font-size: 15px;
+  font-size: 14px;
   padding: var(--padding-gap2);
 }
 

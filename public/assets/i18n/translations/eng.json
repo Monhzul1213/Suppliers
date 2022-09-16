@@ -13,7 +13,7 @@
     "auth/user-not-found": "User is not found.",
     "auth/wrong-password": "Password is wrong.",
     "is_invalid": " Email is invalid",
-    "is_empty": " can't be empty.",
+    "is_empty": " the enter",
     "not_zero": " can't be 0.",
     "less_than": " can't be more than Receivable - Payable.",
     "must_number": " must be number.",
@@ -179,5 +179,7 @@
   "AppServer_IP": "AppServer IP",
   "AppServer_Port": " Port",
   "AppServer_UserID": " UserID",
-  "AppServer_UserPass": " UserPass"
+  "AppServer_UserPass": " UserPass",
+  "txntype": "Transaction type",
+  "txntype_enter": "Enter the transaction type"
 }

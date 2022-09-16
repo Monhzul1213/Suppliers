@@ -33,6 +33,8 @@ export function Table(props){
       { Header: <div style={{ textAlign:'center',} }>{t('AppServer_Port')}</div>, accessor: 'AppServerLoginPort', Cell: props => <div style={{textAlign: 'center'}}>{(props.value)}</div>   },     
       { Header: <div style={{ textAlign:'center', } }>{t('AppServer_UserID')}</div> ,accessor: 'AppServerLoginUserID', Cell: props => <div style={{textAlign: 'center'}}>{(props.value)}</div> },  
       { Header:<div style={{textAlign: 'center' }}>{t('AppServer_UserPass')}</div> , accessor: 'AppServerLoginUserPass',   },
+      { Header:<div style={{textAlign: 'center' }}>{t('AppServer_UserPass')}</div> , accessor: 'TxnType',   },
+      
      
       
       // { Header: <div style={{textAlign: 'center', width: '80px'}}>{t('table.usevendorCount')}</div>, accessor: 'UseVendorCount',

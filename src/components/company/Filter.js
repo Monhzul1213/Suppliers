@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
-import { Checkbox } from 'antd';
-
 import '../../css/filter.css';
-import { getConstants, setInventoryStatus } from '../../services';
 import { FilterInput, FilterDropdown, AddButton, SearchButton } from '../all';
 
 export function Filter(props){
-  const { getData, addRequest, setError, checked, setChecked } = props;
+  const { getUser, addRequest, setError, checked, setChecked } = props;
   const { t } = useTranslation();
-  const [barcode, setBarcode] = useState('');
-  const [status, setStatus] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const inventoryStatus = useSelector(state => state.constants.inventory_status);
-  const login = useSelector(state => state.login);
+  const [CpnyID, setCpnyID] = useState('');
 
   // const onFocus = async () => {
   //   if(!inventoryStatus?.length){
@@ -28,7 +19,20 @@ export function Filter(props){
 
   return (
     <div className='filter_container2'>
+        <div className='filter_container3'>
+        <div className='filter_container'>
+          <FilterInput
+            label='table.company'
+            value={CpnyID}
+            setValue={setCpnyID} 
+            onPressEnter={() => getUser(CpnyID)}
+            icon='AiOutlineUser' />
+          <SearchButton 
+          onClick={() => getUser(CpnyID)} 
+          />
+        </div>
         
+      </div>
       <AddButton onClick={addRequest} />
     </div>
   )

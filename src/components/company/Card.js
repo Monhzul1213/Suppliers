@@ -6,8 +6,9 @@ import {db} from '../../firebase'
 import { formatNumber } from '../../helpers';
 import '../../css/card.css';
 import moment, { isDate } from 'moment';
-import { Check, CardPassword,CardPassword1, CardInput, CardInput1, CardField, CardNote, Loader, DynamicAIIcon, Error1, CardDropdown } from '../all';
+import { Cardlength, CardPassword,CardPassword1, CardInput, CardInput1, CardField, CardNote, Loader, DynamicAIIcon, Error1, CardDropdown } from '../all';
 import { now } from 'lodash';
+// import { Options } from '../all/CardDropdown';
 
 export function Card(props){
   const { visible, selected, setSelected, data, onClose, setData, getUser} = props;
@@ -39,7 +40,6 @@ export function Card(props){
   const [TxnType, setTxnType] = useState({ value: '', error: null });
 
   useEffect(() => {
-  
     setEmail({ value: selected?.Email ?? '' })
     setCpnyID({ value: selected?.CpnyID ?? '' })
     setWebUserID({ value: selected?.WebUserID ?? '' })
@@ -56,8 +56,9 @@ export function Card(props){
     setLicenseAmt({value : disabled ? formatNumber(selected?.LicenseAmt ): (selected?.LicenseAmt ?? '') });
     setPhone({ value: selected?.Phone ?? '' });
     setCreatedDate({value: selected?.CreatedDate})
-    setTxnType({value: selected?.TxnType })
-    // setTxnType(selected?.TxnType );
+    setTxnType({value: selected?.txnType} )
+    
+    console.log(selected?.TxnType )
     setDisabled(disabled);
     return () => {};
   }, [selected]);
@@ -67,15 +68,29 @@ export function Card(props){
     e.preventDefault()
     let text = LicenseAmt?.value?.replace(/[^0-9]/g, '');
     let text1 = AppServerIP?.value?.replace(/[^0-9.]/g, '');
-    // console.log(TxnType?.value)
-    // console.log(moment)
+    
+    let txnType = [];
+    TxnType?.value?.map(item => {
+      //label, value
+      txnType.push(item?.value)
+    })
+   console.log(txnType)
+
+  //  let Txntype = [];
+  //   txnType.map(item => {
+  //     //label, value
+  //     Txntype.push(item)
+  //   })
+  //  console.log(Txntype)
+   
+   
 // return;
      if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value && WebPassword?.value &&AppServerIP?.value && checkIfValidIP(AppServerIP?.value) &&VendorCount?.value && !isNaN(VendorCount?.value) && (LicenseAmt?.value && LicenseAmt?.value !== '0') && !isNaN(text) &&WebServiceURL?.value &&AppServerLoginUserID?.value &&AppServerLoginUserPass?.value &&Phone?.value && !isNaN(Phone?.value) &&Address?.value &&AppServerLoginPort?.value &&  Email?.value && isValidEmail(Email?.value) && TxnType?.value ){
       setLoader(true);
       setError(null);
       let requests = [{
         LicenseAmt: parseFloat(text),
-        AppServerIP: parseFloat(text1)
+        AppServerIP: parseFloat(text1),
       }];
 
     if(selected)requests[0].RequestID = selected.RequestID;
@@ -94,8 +109,8 @@ export function Card(props){
     //  else {
       setDoc(userRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value, WebPassword: WebPassword?.value, AppServerIP:AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value,  VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, 
       AppServerLoginUserPass:AppServerLoginUserPass?.value,  
-      WebServiceURL:WebServiceURL?.value, TxnType:TxnType?.value.toString(),
-      Address:Address?.value, Email:Email?.value , CreatedDate: CreatedDate?.value, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, h:mm:ss a')},)
+      WebServiceURL:WebServiceURL?.value, TxnType: txnType.toString(),
+      Address:Address?.value, Email:Email?.value ,CreatedDate: CreatedDate?.value, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss')},)
         onClose(true);
        message.success(t('request_success'));
        
@@ -113,7 +128,7 @@ export function Card(props){
      }  
      else {
     
-       addDoc(userCollRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value, WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, h:mm:ss a'), CreatedUserName: WebUserID?.value,TxnType:TxnType?.value.toString(), LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, h:mm:ss a')} )
+       addDoc(userCollRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value, WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: WebUserID?.value, TxnType: txnType, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
        onClose(true)
        message.success(t('request_success'));
      }
@@ -134,6 +149,7 @@ export function Card(props){
     if(!Address?.value) setAddress({value: '', error: 'is_empty'});
     if(!AppServerLoginPort?.value) setAppServerLoginPort({value: '', error: 'is_empty'});
     if(!Email?.value) setEmail({value: '', error: 'is_empty'});
+    if(!TxnType?.value) setTxnType({value: '', error: 'is_empty'});
     // if(!isValidEmail(Email?.value)) setEmail({value: '', error: 'is_invalid'});
     // if(!isValidEmail(WebUserID?.value)) setWebUserID({value: '', error: 'is_invalid'});
     else if(isNaN(text)) setVendorCount({...VendorCount, ...{error: 'must_number'}});
@@ -212,9 +228,9 @@ export function Card(props){
       </div>
       <div className='card'>
       <CardNote label={('table.address')}  value={Address} setValue={setAddress} /> </div>
-     
+      <CardDropdown label={('txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} />
       <div className='card4'>
-      <CardInput label={('table.vendorCount')}  value={VendorCount} setValue={changeVendorCount} handleEnter={handleEnter} />
+      <Cardlength label={('table.vendorCount')}  value={VendorCount} setValue={changeVendorCount} handleEnter={handleEnter} />
       <CardInput1 label={('table.License')}  disabled={disabled} value={LicenseAmt} setValue={changeLicense} handleEnter={handleEnter}/>
       </div>
       <div className='card5'>
@@ -227,9 +243,9 @@ export function Card(props){
       setValue={setAppServerLoginUserID}/>
       <CardPassword1 label={('AppServer_UserPass')} isPassword={true} value={AppServerLoginUserPass} handleEnter={handleEnter} setValue={setAppServerLoginUserPass} />
       </div>
-      <div className='card'>
-      <CardDropdown label={('Txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} />
-      </div>
+      {/* <div className='card'>
+      <CardDropdown label={('txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} />
+      </div> */}
      
       </div>
       {!disabled && <button type='submit' disabled={loader} className='login_form_btn'>

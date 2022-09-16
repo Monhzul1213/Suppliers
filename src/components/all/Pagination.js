@@ -13,7 +13,7 @@ export function Pagination(props){
   let last = (((pageIndex + 1) * pageSize) < total) ? ((pageIndex + 1) * pageSize) : total;
 
   const paginationRange = usePagination({ currentPage: pageIndex + 1, totalPageCount: pageOptions.length, siblingCount: 1, pageSize });
-  const pageRange = [50, 100, 150];
+  const pageRange = [20, 40, 60];
 
   return (
     <div className='pagination_back' id={id}>

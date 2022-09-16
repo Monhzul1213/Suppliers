@@ -38,7 +38,8 @@ export function Company(){
       })
       // console.log(users)
       setData(users)
-     }).catch(error=> console.log(error.message))
+     })
+     .catch(error=> console.log(error.message))
   }
 
   useEffect(() => {
@@ -59,7 +60,6 @@ export function Company(){
   return (
     <>
      <LoadingOverlay active={loading} spinner styles={overlayStyle}>
-         
           <Header/>
           <div className='page_container' style={{height: height - 58}}>
            {visible ? <Card onClose={onClose} {...cardProps} />: null}

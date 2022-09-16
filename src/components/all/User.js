@@ -37,8 +37,9 @@ export function User(){
         <div className='divider' />
       </Menu.Item>
       <Menu.Item key='logout' onClick={onPressLogout}>
-        <div className='menu_language_back'>
-          <span className='menu_language'>{t('login.logout')}</span>
+        <div className='menu_logout_back'>
+        <DynamicAIIcon className='drop_icon' name='AiOutlineLogout'/>
+          <span className='menu_logout'>{t('login.logout')}</span>
         </div>
       </Menu.Item>
     </Menu>

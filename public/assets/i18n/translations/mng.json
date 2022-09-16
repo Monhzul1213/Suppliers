@@ -186,5 +186,7 @@
   "AppServer_IP": "Сервэрийн хаяг",
   "AppServer_Port": "Сервэрийн порт",
   "AppServer_UserID": " Холбогдох хэрэглэгч",
-  "AppServer_UserPass": " Холбогдох хэрэглэгчийн нууц үг "
+  "AppServer_UserPass": " Холбогдох хэрэглэгчийн нууц үг ",
+  "txntype": "Гүйлгээний төрөл",
+  "txntype_enter": "Гүйлгээний төрөл оруулна уу?"
 }

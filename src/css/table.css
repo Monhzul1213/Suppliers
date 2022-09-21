@@ -44,7 +44,7 @@
 }
 
 .table_header_text {
-  color: var(--text-color);
+  color: #2159b0;
   text-align: center;
   padding: var(--padding-gap2);
   font-size: 15px;

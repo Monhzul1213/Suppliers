@@ -5,27 +5,34 @@ import { useTranslation } from 'react-i18next';
 
 import { Error } from './Error';
 
-const Option = (props) => {
-  // let txntype =[];
-  // Option.map(item => {
-  //   //label, value
-  //   txntype.push(item?.value)
-  // })
-  // console.log(txntype)
-  return (
-    <div>
-      <components.Option {...props}>
-        <input
-          type="checkbox"
-          checked={props.isSelected}
-          onChange={() => null}
-        />{" "}
-        <label>{props.label}</label>
-      </components.Option>
-    </div>
-  );
-};
 
+  const Option = (props) => {
+    return (
+      <div className="option" >
+        <components.Option {...props} style>
+          <input  
+            type="checkbox"
+            checked={props.isSelected}
+            onChange={() => null}
+          /> 
+          {" "}
+          
+          <label>{props.label}</label>
+        </components.Option>
+      </div>
+    );
+  };
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      borderBottom: '1px dotted pink',
+      height: state.isSelected ? '20px' : '20px',
+      paddingTop: 0,
+      
+    }),
+   
+  
+  }
 export function CardDropdown(props){
   const { label, value, setValue, handleEnter,onFocus,  disabled, id } = props;
   const { t } = useTranslation();
@@ -36,22 +43,22 @@ export function CardDropdown(props){
   };
 
   const Options = [
-    { label: "Багцлалт", value: 'INAS' },
-      { label: "Тохируулга", value: 'INAJ' },
-      {label: "Зарлага", value: 'INII' },
-      {label: "Тооллого", value: 'INPI' },
-      { label: "Орлого", value: 'INRC' },
-      { label: "Шилжүүлэг", value: 'INTR' },
-      { label: "Буцаалтын орлого", value: 'PSCM' },
-      { label: "Буцаалтын Зарлага", value: 'PSIN' }
+    { label: "Бараа материал : Багцлалт", value: 'INAS' },
+      { label: "Бараа материал : Тохируулга", value: 'INAJ' },
+      {label: "Бараа материал : Зарлага", value: 'INII' },
+      {label: "Бараа материал : Тооллого", value: 'INPI' },
+      { label: "Бараа материал : Орлого", value: 'INRC' },
+      { label: "Бараа материал : Шилжүүлэг", value: 'INTR' },
+      { label: "Борлуулалт : Буцаалтын орлого", value: 'PSCM' },
+      { label: "Борлуулалт : Зарлага", value: 'PSIN' }
     ];
 
   return(
-    <div className="card_input_container">
+    <div className="card_input_container"  >
       <p className='card_input_label'>{t(label)}</p>
       <ReactSelect 
       placeholder={t('txntype_enter')}
-      // className="card_input"
+      styles={customStyles}
       options={Options}
        isMulti
        closeMenuOnSelect={false}
@@ -61,12 +68,6 @@ export function CardDropdown(props){
         Option
       }}
       onChange={onChange}
-      // value={[value]}
-      // filterOption={(input, option) => option.children?.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-      // showSearch
-      // onFocus={onFocus}
-      // disabled={disabled}
-      // onSelect={e => setValue(e.target.value)}
       />
       {value?.error ? <Error label={label} error={value?.error} fromForm={true} /> : null}
     </div>

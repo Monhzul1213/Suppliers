@@ -114,6 +114,7 @@
     "start_date": "Start date",
     "end_date": "End date"
   },
+  "company-search": "Search company",
   "price_request": "Price change request",
   "request_success": "Request sent successfully.",
   "begin_balance": "Begin balance",

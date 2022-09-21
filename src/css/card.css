@@ -21,6 +21,14 @@
   outline: none;
   border-color: var(--link-color);
 }
+.option{
+  /* max-height: 40vh; */
+  /* overflow: scroll; */
+  /* position: absolute; */
+  height: 20px;
+/* margin-top: 10px; */
+  
+}
 
 .carddd:focus-within {
   outline: none;
@@ -267,8 +275,8 @@ width:300px;
   }
   .css-b62m3t-container {
     width: 620px;
-    margin: 5px  0 0 0px;
-    height: 40px;
+    margin: 5px  0 0 1px;
+    /* height: 40px; */
 }
 }
 @media only screen and (max-width: 440px) {
@@ -424,8 +432,7 @@ width:300px;
   }
   .css-b62m3t-container {
     width: 420px;
-    margin: 5px  0 0 0px;
-    height: 40px;
+    margin: 5px  0 0 5px;
 }
 }
 
@@ -466,6 +473,19 @@ width:300px;
 
 .card_input_container {
   margin-bottom: 5px;
+ 
+}
+.react-select-2-listbox{
+  /* position: absolute; */
+  /* background-color: DodgerBlue; */
+  top: 10%;  
+  overflow: scroll;
+  /* right: 0; */
+  /* z-index: 99; */
+  height: 100vh;
+  /* width: 500px; */
+  /* border: red; */
+  /* color: #aa4f4f99; */
 }
 
 .card_input_label {
@@ -474,7 +494,23 @@ width:300px;
   font-weight: 500;
   margin: 0;
 }
+/* .option{
+  top:100%;
+  background-color:hsl(0, 0%, 100%);
+  border-radius:0px;
+  box-shadow:0 0 0 1px hsla(0, 0%, 0%, 0.1),0 4px 11px hsla(0, 0%, 0%, 0.1);
+  margin-bottom:8px;margin-top:8px;
+  position:absolute;width:100%;z-index:1;box-sizing:border-box;
+} */
+.css-b62m3t-container:focus {
+  outline: none;
+  border-color: var(--link-color);
+}
 
+.css-b62m3t-container:focus-within {
+  outline: none;
+  border-color: var(--link-color);
+}
 .card_input:focus {
   outline: none;
   border-color: var(--link-color);

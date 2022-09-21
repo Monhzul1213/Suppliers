@@ -3,23 +3,23 @@ import { useTranslation } from 'react-i18next';
 import {collection, doc, getDocs} from 'firebase/firestore'
 import {db} from '../../firebase'
 import {formatNumber} from '../../helpers/formatNumber'
-import { useTable, usePagination, useRowSelect, useSortBy } from 'react-table';
+import { useTable, usePagination, useRowSelect, useSortBy, useGlobalFilter, useFilters } from 'react-table';
 
 import '../../css/table.css';
-import { Pagination, Sort } from '../all';
+import { Pagination, Sort, ColumnFilter } from '../all';
 
 export function Table(props){
   // const[user, setUser]= useState([])
-  const { data, setVisible, selected, setSelected, setData } = props;
+  const { data, setVisible, selected, setSelected, setData , CpnyID, setCpnyID} = props;
   const { t, i18n } = useTranslation();
   const [columns, setColumns] = useState([]);
 
 
-  
+
  
   useEffect(() => {
     setColumns([
-      { Header:<div style={{  textAlign:'center', }}>{t('table.company')}</div>, accessor: 'CpnyID', },
+      { Header:<div style={{  textAlign:'center', }}>{t('table.company')}</div>, accessor: 'CpnyID' },
       { Header:<div style={{ textAlign:'center',}}>{t('user_email')}</div>, accessor: 'WebUserID', },
       { Header:<div style={{ textAlign:'center',}}>{t('user_password')}</div>, accessor: 'WebPassword',  },
       { Header:<div style={{ textAlign:'center',}}>{t('login.email')}</div>, accessor: 'Email', },
@@ -29,11 +29,13 @@ export function Table(props){
       { Header: <div style={{textAlign: 'center', }}>{t('table.License')}</div>, accessor: 'LicenseAmt', 
       Cell: props => <div style={{textAlign: 'right',  paddingRight: 15}}>{(props.value)}</div> }, 
       { Header: <div style={{  textAlign:'center',} }>{t('table.webservice')}</div>, accessor: 'WebServiceURL' , Cell: props => <div style={{textAlign: 'left',  paddingRight: 15}}>{(props.value)}</div> },
+      { Header:<div style={{textAlign: 'center' }}>{t('txntype')}</div> , accessor: 'TxnType',   },
       { Header: <div style={{textAlign:'center'}}>{t('AppServer_IP')}</div> , accessor: 'AppServerIP' ,  Cell: props => <div style={{ paddingRight: 15}}>{(props.value)}</div> },
       { Header: <div style={{ textAlign:'center',} }>{t('AppServer_Port')}</div>, accessor: 'AppServerLoginPort', Cell: props => <div style={{textAlign: 'center'}}>{(props.value)}</div>   },     
       { Header: <div style={{ textAlign:'center', } }>{t('AppServer_UserID')}</div> ,accessor: 'AppServerLoginUserID', Cell: props => <div style={{textAlign: 'center'}}>{(props.value)}</div> },  
       { Header:<div style={{textAlign: 'center' }}>{t('AppServer_UserPass')}</div> , accessor: 'AppServerLoginUserPass',   },
-      { Header:<div style={{textAlign: 'center' }}>{t('AppServer_UserPass')}</div> , accessor: 'TxnType',   },
+      
+      { Header:<div style={{textAlign: 'center' }}>{t('table.created_date')}</div> , accessor: 'CreatedDate',   }
       
      
       
@@ -44,6 +46,15 @@ export function Table(props){
     
     return () => {};
   }, [i18n?.language])
+
+// {data.filter((val)=>{
+//     // if(CpnyID == ""){
+//     //   return val
+//     // } else if (val.CpnyID.toLowerCase().includes(CpnyID.toLowerCase())){
+//     //   return val;
+//     // }
+//   })
+// }
 
   useEffect(() => {
     if(!selected){
@@ -64,20 +75,34 @@ export function Table(props){
     row?.toggleRowSelected();
   }
 
-  const tableInstance = useTable( { columns, data, initialState: { pageIndex: 0, pageSize: 100, sortBy: [{ id: 'CreatedDate', asc: true }] }}, useSortBy, usePagination, useRowSelect);
-  const { getTableProps, getTableBodyProps, headerGroups, prepareRow, page, toggleAllRowsSelected } = tableInstance;
+  const tableInstance = useTable( { columns, data, 
+  initialState: { pageIndex: 0, pageSize: 100, sortBy: [{ id: 'CreatedDate', desc: true }] }}, useSortBy, usePagination, useRowSelect, //useFilters //useGlobalFilter 
+  );
+  const { getTableProps, getTableBodyProps, headerGroups, prepareRow, page, toggleAllRowsSelected , 
+   state, setGlobalFilter
+  } = tableInstance;
+  const {globalFilter}=state
 
+
+  // var filter =  data.filter(function(creature) {
+  //   return creature.CpnyID == "Ultimate"//data.includes(CpnyID.toLowerCase());
+    
+  // })
+  // console.log(filter);
   return (
+    <>
+ 
     <div className='page_back'>
       <div className='table_container'>
         <table className='table_back' {...getTableProps()}>
           <thead>
             {headerGroups.map(headerGroup => (
-              <tr {...headerGroup.    getHeaderGroupProps()}>
+              <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
                   <th className='table_header_text' {...column.getHeaderProps(column.getSortByToggleProps())}>
                     <div className='table_header_cell'>
                       <span style={{flex: 1}}>{column.render('Header')}</span>
+                      {/* <div>{column.canFilter ? column.render('Filter'):null}</div> */}
                       <Sort data={column} />
                     </div>
                   </th>
@@ -112,5 +137,6 @@ export function Table(props){
       </div>
       <Pagination tableInstance={tableInstance} hasTotal={true} total={data?.length}  />
     </div>
+    </>
   )
 }

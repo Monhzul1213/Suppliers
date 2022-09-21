@@ -39,6 +39,7 @@ export function Card(props){
   const [LastUserName, setLastUserName] = useState({ value: '', error: null });
   const [TxnType, setTxnType] = useState({ value: '', error: null });
 
+ 
   useEffect(() => {
     setEmail({ value: selected?.Email ?? '' })
     setCpnyID({ value: selected?.CpnyID ?? '' })
@@ -56,9 +57,31 @@ export function Card(props){
     setLicenseAmt({value : disabled ? formatNumber(selected?.LicenseAmt ): (selected?.LicenseAmt ?? '') });
     setPhone({ value: selected?.Phone ?? '' });
     setCreatedDate({value: selected?.CreatedDate})
-    setTxnType({value: selected?.txnType} )
-    
-    console.log(selected?.TxnType )
+    // setTxnType({value: selected?.TxnType} )
+    const Options = [
+      { label: "Бараа материал : Багцлалт", value: 'INAS' },
+        { label: "Бараа материал : Тохируулга", value: 'INAJ' },
+        {label: "Бараа материал : Зарлага", value: 'INII' },
+        {label: "Бараа материал : Тооллого", value: 'INPI' },
+        { label: "Бараа материал : Орлого", value: 'INRC' },
+        { label: "Бараа материал : Шилжүүлэг", value: 'INTR' },
+        { label: "Борлуулалт : Буцаалтын орлого", value: 'PSCM' },
+        { label: "Борлуулалт : Зарлага", value: 'PSIN' }
+      ];
+    // console.log(selected?.TxnType )
+    if(selected?.TxnType){
+      const list = [];
+      const typeList = selected?.TxnType?.split(',');
+      console.log(typeList)
+      typeList?.map(item => {
+        let option = Options?.filter(opt => opt.value === item)[0]
+        if(option?.value == item){
+          list.push(option)
+        }
+        console.log(option)
+      })
+      setTxnType({ value: list })
+    }
     setDisabled(disabled);
     return () => {};
   }, [selected]);
@@ -128,7 +151,7 @@ export function Card(props){
      }  
      else {
     
-       addDoc(userCollRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value, WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: WebUserID?.value, TxnType: txnType, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
+       addDoc(userCollRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value, WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: WebUserID?.value, TxnType: txnType.toString(), LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
        onClose(true)
        message.success(t('request_success'));
      }
@@ -162,6 +185,8 @@ export function Card(props){
    if(!checkIfValidIP(AppServerIP?.value)) setAppServerIP({...AppServerIP, ...{error: 'is'}});
   }
   }
+
+
   const changeLicense = value => {
     let text = value?.value?.replace(/[^0-9]/g, '');
     if(isNaN(text)) setLicenseAmt({ value: value?.value, error: 'must_number'});
@@ -227,8 +252,10 @@ export function Card(props){
       <CardInput1 label={('table.webservice')}  value={WebServiceURL} setValue={setWebServiceURL} handleEnter={handleEnter} />
       </div>
       <div className='card'>
-      <CardNote label={('table.address')}  value={Address} setValue={setAddress} /> </div>
       <CardDropdown label={('txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} />
+      <CardNote label={('table.address')}  value={Address} setValue={setAddress} /> 
+      </div>
+      
       <div className='card4'>
       <Cardlength label={('table.vendorCount')}  value={VendorCount} setValue={changeVendorCount} handleEnter={handleEnter} />
       <CardInput1 label={('table.License')}  disabled={disabled} value={LicenseAmt} setValue={changeLicense} handleEnter={handleEnter}/>

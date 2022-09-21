@@ -21,27 +21,22 @@ export const auth = getAuth(app);
 export const login = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    return Promise.resolve({ error: false  ?? 'Алдаа гарлаа.'});
+    return Promise.resolve({ error: false  });
+    // if(!email){
+    //   return Promise.resolve({ error: 'Хэрэглэгч бүртгэлгүй байна.' });
+    // } else if(email !== password)
+    //   return Promise.resolve({ error: 'Хэрэглэгчийн нууц үг буруу байна.' });
   } catch (err) {
-    console.error('=========', JSON.stringify(err));
-    return Promise.resolve({ error: err.code });
+    // console.error('=========', JSON.stringify(err));
+    // return Promise.resolve({ error: err.code });
+    if(!email){
+      return Promise.resolve({ error: 'Хэрэглэгч бүртгэлгүй байна.' });
+    } 
+    else if(email !== password)
+      return Promise.resolve({ error: 'Хэрэглэгчийн нууц үг буруу байна.' });
   }
 };
 
-export const signUp = async (email, password) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    user.updateDisplayName('Admin');
-    await getDocs(collection(db, 'users'), {
-      uid: user.uid, authProvider: "local", email, name: 'Admin'
-    });
-    return Promise.resolve({ error: false });
-  } catch (err) {
-    console.error(err);
-    return Promise.resolve({ label: err.code });
-  }
-};
 
 export const logout = () => {
   signOut(auth);

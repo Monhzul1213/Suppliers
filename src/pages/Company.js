@@ -8,13 +8,15 @@ import{Empty, Error} from '../components/all'
 import '../css/list.css'
 import { useDimensions } from '../helpers/useDimensions';
 import LoadingOverlay from 'react-loading-overlay';
+import { lowerCase } from 'lodash';
 // import {  addDoc ,updateDoc, collection, doc} from 'firebase/firestore';
 // import {db} from '../firebase'
  LoadingOverlay.propTypes = undefined;
 export function Company(){
   const { height } = useDimensions();
-
+  const [CpnyID, setCpnyID] = useState('');
   const [data, setData] = useState([]);
+  const [originaldata, setOriginalData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -25,19 +27,21 @@ export function Company(){
       setVisible(true);
       setSelected(null)
   }
-  function getUser(){
+function getUser(){
     let users = []
+    // let users1 = []
     const userCollectionRef =collection(db, 'smWebUsers')
      getDocs(userCollectionRef )
      .then(response=>{
       response.docs.map(doc => {
-        // console.log(doc?.data(), doc?.id)
         let user = {...doc.data(), ...{ id: doc?.id }};
-        console.log(user)
+        // let user1 = {...doc.data(), ...{ id: doc?.id }};
+        // console.log(user1)
         users.push(user);
+        // users1.push(user1);
       })
-      // console.log(users)
       setData(users)
+      setOriginalData(users)
      })
      .catch(error=> console.log(error.message))
   }
@@ -54,9 +58,18 @@ export function Company(){
        getUser()
     }
   } 
+
+const changeCpnyID = value => {
+    console.log(value);
+    setCpnyID(value);
+    let newData = originaldata?.filter(word => word.CpnyID.toLowerCase().includes(CpnyID.toLowerCase()) ) 
+    // let originalData = data 
+    setData(newData)
+    // setData(originaldata)
+}
   let overlayStyle = { overlay: base => ({...base, background: 'rgba(0, 0, 0, 0.2)'}) };
-  let cardProps = { visible, setVisible, selected, setSelected,  setData };
-  let filterProps = { addRequest, setData,  setError , setVisible };
+  let cardProps = { visible, setVisible, selected, setSelected,  setData, CpnyID, setCpnyID: changeCpnyID };
+  let filterProps = { addRequest, setData,  setError , setVisible, CpnyID, setCpnyID: changeCpnyID };
   return (
     <>
      <LoadingOverlay active={loading} spinner styles={overlayStyle}>

@@ -21,19 +21,14 @@ export const auth = getAuth(app);
 export const login = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    return Promise.resolve({ error: false  });
-    // if(!email){
-    //   return Promise.resolve({ error: 'Хэрэглэгч бүртгэлгүй байна.' });
-    // } else if(email !== password)
-    //   return Promise.resolve({ error: 'Хэрэглэгчийн нууц үг буруу байна.' });
-  } catch (err) {
-    // console.error('=========', JSON.stringify(err));
-    // return Promise.resolve({ error: err.code });
+    // return Promise.resolve({ error: false  });
     if(!email){
       return Promise.resolve({ error: 'Хэрэглэгч бүртгэлгүй байна.' });
-    } 
-    else if(email !== password)
+    } else if(email !== password)
       return Promise.resolve({ error: 'Хэрэглэгчийн нууц үг буруу байна.' });
+  } catch (err) {
+    console.error('=========', JSON.stringify(err));
+    return Promise.resolve({ error: err.code });
   }
 };
 

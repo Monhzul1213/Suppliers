@@ -22,4 +22,5 @@ export * from './Check';
 export * from './FilterInput';
 export * from './SearchButton';
 export * from './Cardlength';
+export * from './GlobalFilter';
 export * from './ColumnFilter';

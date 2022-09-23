@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
-import { image_login2, image_login3 } from '../../assets';
+import office  from '../../assets/office.jpg';
 
 export default function LoginImages(){
   const pagination = {
@@ -16,17 +16,17 @@ export default function LoginImages(){
   return (
     <div>
       <div className='login_image_container'>
-        <img src={image_login2} alt='image_login' className='login_image' />
+        <img src={office} alt='image_login' className='login_image' />
       </div>
       <div className='login_slides'>
-        <Swiper autoplay={{delay: 4000}} pagination={pagination} modules={[Pagination]}>
+        {/* <Swiper autoplay={{delay: 4000}} pagination={pagination} modules={[Pagination]}>
           <SwiperSlide>
-            <img src={image_login3} alt='image_login' className='login_image' />
+            <img src={office} alt='image_login' className='login_image' />
           </SwiperSlide>
-          <SwiperSlide>
-            <img src={image_login2} alt='image_login' className='login_image' />
-          </SwiperSlide>
-        </Swiper>
+          <SwiperSlide> */}
+            <img src={office} alt='image_login' className='login_image' />
+          {/* </SwiperSlide>
+        </Swiper> */}
       </div>
     </div>
   )

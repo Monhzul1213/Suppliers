@@ -14,7 +14,7 @@ import { lowerCase } from 'lodash';
  LoadingOverlay.propTypes = undefined;
 export function Company(){
   const { height } = useDimensions();
-  const [CpnyID, setCpnyID] = useState('');
+  const [data1, setData1] = useState('');
   const [data, setData] = useState([]);
   const [originaldata, setOriginalData] = useState([]);
   const [error, setError] = useState(null);
@@ -60,19 +60,20 @@ function getUser(){
   } 
 
 const changeCpnyID = value => {
-    console.log(value);
-    setCpnyID(value);
-    let newData = originaldata?.filter(word => word.CpnyID.toLowerCase().includes(CpnyID.toLowerCase()) ) 
+    // console.log(value);
+    setData1(value);
+    let newData = originaldata?.filter(word => word.data1.toLowerCase().includes(data1.toLowerCase()) ) 
     // let originalData = data 
+    // console.log(originaldata)
     setData(newData)
     // setData(originaldata)
 }
   let overlayStyle = { overlay: base => ({...base, background: 'rgba(0, 0, 0, 0.2)'}) };
-  let cardProps = { visible, setVisible, selected, setSelected,  setData, CpnyID, setCpnyID: changeCpnyID };
-  let filterProps = { addRequest, setData,  setError , setVisible, CpnyID, setCpnyID: changeCpnyID };
+  let cardProps = { visible, setVisible, selected, setSelected,  setData, data1, setData1: changeCpnyID };
+  let filterProps = { addRequest, setData,  setError , setVisible, data1, setData1: changeCpnyID };
   return (
     <>
-     <LoadingOverlay active={loading} spinner styles={overlayStyle}>
+     {/* <LoadingOverlay active={loading} spinner styles={overlayStyle}> */}
           <Header/>
           <div className='page_container' style={{height: height - 58}}>
            {visible ? <Card onClose={onClose} {...cardProps} />: null}
@@ -85,7 +86,7 @@ const changeCpnyID = value => {
              </div>
             </div>
           </div>
-          </LoadingOverlay>
+          {/* </LoadingOverlay> */}
         </>
     
     )

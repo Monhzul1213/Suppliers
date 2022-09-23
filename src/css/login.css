@@ -194,13 +194,13 @@ input:-webkit-autofill:active{
     display: none;
   }
 
-  .login_form {
+  /* .login_form {
     flex: 1;
     min-height: 85vh;
     display: flex;
     
-    background-color: var(--root-color);
-  }
+    background-color: #e5e7e9;
+  } */
 
   .login_form_container {
     flex: 1;
@@ -227,7 +227,7 @@ input:-webkit-autofill:active{
 
   .login_form {
     position: absolute;
-    background-color: var(--root-color);
+    background-color: #e5e7e9;
     border-radius: 15px;
     width: 80vw;
     top: 10vh;
@@ -275,7 +275,7 @@ input:-webkit-autofill:active{
     bottom: 0;
     right: 0;
     width: 30%;
-    background-color: var(--root-color);
+    background-color: #e5e7e9;
   }
 
   .login_form_container {

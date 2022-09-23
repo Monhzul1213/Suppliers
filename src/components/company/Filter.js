@@ -4,7 +4,7 @@ import '../../css/filter.css';
 import { FilterInput, FilterDropdown, AddButton, SearchButton } from '../all';
 
 export function Filter(props){
-  const { getUser,setData, addRequest, setError, checked, setChecked, CpnyID, setCpnyID } = props;
+  const { getUser,setData, addRequest, setError, checked, setChecked, data1, setData1 } = props;
   const { t } = useTranslation();
 
   return (
@@ -13,8 +13,8 @@ export function Filter(props){
         <div className='filter_container'>
           <FilterInput
             label='company-search'
-            value={CpnyID}
-            setValue={setCpnyID} 
+            value={data1}
+            setValue={setData1} 
             // onChange={(e)=>{ setCpnyID(e.target.value)}}
             // onPressEnter={() => getUser(CpnyID)}
             icon='AiOutlineUser' />

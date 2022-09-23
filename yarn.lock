@@ -6087,6 +6087,11 @@
   "resolved" "https://registry.npmjs.org/he/-/he-1.2.0.tgz"
   "version" "1.2.0"
 
+"highlight-words-core@^1.2.0":
+  "integrity" "sha512-BXUKIkUuh6cmmxzi5OIbUJxrG8OAk2MqoL1DtO3Wo9D2faJg2ph5ntyuQeLqaHJmzER6H5tllCDA9ZnNe9BVGg=="
+  "resolved" "https://registry.npmjs.org/highlight-words-core/-/highlight-words-core-1.2.2.tgz"
+  "version" "1.2.2"
+
 "history@^5.2.0":
   "integrity" "sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ=="
   "resolved" "https://registry.npmjs.org/history/-/history-5.3.0.tgz"
@@ -7535,6 +7540,11 @@
   dependencies:
     "fs-monkey" "1.0.3"
 
+"memoize-one@^4.0.0":
+  "integrity" "sha512-QmpUu4KqDmX0plH4u+tf0riMc1KHE1+lw95cMrLlXQAFOx/xnBtwhZ52XJxd9X2O6kwKBqX32kmhbhlobD0cuw=="
+  "resolved" "https://registry.npmjs.org/memoize-one/-/memoize-one-4.0.3.tgz"
+  "version" "4.0.3"
+
 "memoize-one@^5.0.0":
   "integrity" "sha512-zYiwtZUcYyXKo/np96AGZAckk+FWWsUdJ3cHGGmld7+AhvcWmQyGCYUh1hc4Q/pkOhb65dQR/pqCyK0cOaHz4Q=="
   "resolved" "https://registry.npmjs.org/memoize-one/-/memoize-one-5.2.1.tgz"
@@ -8740,7 +8750,7 @@
     "react-is" "^16.3.2"
     "warning" "^4.0.0"
 
-"prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
+"prop-types@^15.5.8", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -9277,6 +9287,15 @@
   "integrity" "sha512-0+V2XwInZJNjW8B2cm+U21Hlv4xnp/1tJqIoDg2rjyWzKTQ9VoLPQ9PAt+fMqPumjLz5uCIREY7YqGSSjc439Q=="
   "resolved" "https://registry.npmjs.org/react-firebase-hooks/-/react-firebase-hooks-5.0.3.tgz"
   "version" "5.0.3"
+
+"react-highlight-words@^0.18.0":
+  "integrity" "sha512-5z+46eLPjB4JWgOhuQ0E+6iUPTD1U3amiy5KKjzZmeJ5zyvHr91hnzBT3UHya/KlySm5KRTKpYpba9vs67oO2A=="
+  "resolved" "https://registry.npmjs.org/react-highlight-words/-/react-highlight-words-0.18.0.tgz"
+  "version" "0.18.0"
+  dependencies:
+    "highlight-words-core" "^1.2.0"
+    "memoize-one" "^4.0.0"
+    "prop-types" "^15.5.8"
 
 "react-i18next@^11.16.2":
   "integrity" "sha512-1iuZduvARUelL5ux663FvIoDZExwFO+9QtRAAt4uvs1/aun4cUZt8XBrVg7iiDgNls9cOSORAhE7Ri5KA9RMvg=="

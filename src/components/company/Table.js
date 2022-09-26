@@ -12,6 +12,7 @@ import Highlighter from 'react-highlight-words';
 export const Table = (props) => {
   const {data, setVisible, selected, setSelected, setData , CpnyID, setCpnyID} = props;
   const [searchText, setSearchText] = useState('');
+  const [filteredInfo, setFilteredInfo] = useState({});
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
   const { t } = useTranslation();
@@ -26,7 +27,10 @@ export const Table = (props) => {
     clearFilters();
     setSearchText('');
   };
-
+  const handleChange = (pagination, filters, sorter) => {
+    console.log('Various parameters', pagination, filters, sorter);
+    setFilteredInfo(filters);
+  };
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
       <div
@@ -213,10 +217,51 @@ export const Table = (props) => {
       title: t('txntype'),
       dataIndex: 'TxnType',
       key: 'TxnType',
-      ...getColumnSearchProps('TxnType'),
+      // ...getColumnSearchProps('TxnType'),
       // sorter: (a, b) => a.TxnType.length - b.TxnType.length,
       // sortDirections: ['descend', 'ascend'],
       // accessor: 'WebPassword'
+    //  width: '5%',
+      // filters: [
+      //   {
+      //     text: 'Бараа материал : Багцлалт',
+      //     value: 'INAS',
+      //   },
+      //   {
+      //     text: 'Бараа материал : Тохируулга',
+      //     value: 'INAJ',
+      //   },
+      //   {
+      //     text: 'Бараа материал : Зарлага',
+      //     value: 'INII',
+      //   },
+        
+      //   {
+      //     text: 'Бараа материал : Тооллого',
+      //     value: 'INPI',
+      //   },
+      //   {
+      //     text: 'Бараа материал : Орлого',
+      //     value: 'INRC',
+      //   },
+      //   {
+      //     text: 'Бараа материал : Шилжүүлэг',
+      //     value: 'INTR',
+      //   },
+      //   {
+      //     text: 'Борлуулалт : Буцаалтын орлого',
+      //     value: 'PSCM',
+      //   },
+      //   {
+      //     text: 'Борлуулалт : Зарлага',
+      //     value: 'PSIN',
+      //   },
+      // ],
+      // filteredValue: filteredInfo.TxnType || null,
+      // onFilter: (value, record) => record.TxnType.includes(value),
+      // // sorter: (a, b) => a.name.length - b.name.length,
+      // // sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
+      // ellipsis: true,
     },  
      {
       title: t('AppServer_IP'),
@@ -253,40 +298,17 @@ export const Table = (props) => {
       dataIndex: 'AppServerLoginUserPass',
       key: 'AppServerLoginUserPass',
       ...getColumnSearchProps('AppServerLoginUserPass'),
+      
       // sorter: (a, b) => a.AppServerLoginUserPass.length - b.AppServerLoginUserPass.length,
       // sortDirections: ['descend', 'ascend'],
       // accessor: 'WebPassword'
     },
   ];
-  // const data = [
-  //   {
-  //     // key: '1',
-  //     company: 'CpnyID',
-  //     user_email: 32,
-  //     user_password: 32,
-  //     email: 222,
-  //     phone: 444,
-  //     address: 'New York No. 1 Lake Park',
-  //     vendorCount: 22,
-  //     License: 34444,
-  //     webservice: 2.2,
-  //     txntype:2,
-  //     AppServer_IP: 22333.532,
-  //     AppServer_Port:2,
-  //     AppServer_UserID: 2,
-  //     AppServer_UserPass: 3333,
-  //   },
-    
-  // ];
-  useEffect(() => {
-    if(!selected){
-      // toggleAllRowsSelected(false);
-    }
-    return () => {};
-  }, [selected]);
+ 
 
   return <AntTable columns={columns} dataSource={data}
-  
+  onChange={handleChange}
+ 
   onRow={(record, rowIndex) => {
     return {
       // onClick: event => {

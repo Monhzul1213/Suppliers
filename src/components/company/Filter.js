@@ -9,7 +9,7 @@ export function Filter(props){
 
   return (
     <div className='filter_container2'>
-        <div className='filter_container3'>
+        {/* <div className='filter_container3'>
         <div className='filter_container'>
           <FilterInput
             label='company-search'
@@ -19,9 +19,9 @@ export function Filter(props){
             // onPressEnter={() => getUser(CpnyID)}
             icon='AiOutlineUser' />
           
-        </div>
+        </div> */}
         
-      </div>
+      {/* </div> */}
       <AddButton onClick={addRequest} />
     </div>
   )

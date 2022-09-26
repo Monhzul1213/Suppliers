@@ -66,7 +66,6 @@ const changeCpnyID = value => {
     // let originalData = data 
     // console.log(originaldata)
     setData(newData)
-    // setData(originaldata)
 }
   let overlayStyle = { overlay: base => ({...base, background: 'rgba(0, 0, 0, 0.2)'}) };
   let cardProps = { visible, setVisible, selected, setSelected,  setData, data1, setData1: changeCpnyID };

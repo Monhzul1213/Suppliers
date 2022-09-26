@@ -119,25 +119,30 @@ export function Card(props){
     if(selected)requests[0].RequestID = selected.RequestID;
 
     if(selected){
-      const userRef = doc(db, "smWebUsers", selected.id)
-      // const userRef= db.collection('smWebUsers').doc(selected.id)
-    //   const q1 = query(userRef, where("WebUserID", "==", WebUserID?.value?.trim() ))
-    //  const query1 = await getDocs(userRef)
-    //  let exists = null;
-    //  query1.forEach(doc => exists = doc.data());
-    //  console.log("tttttttttttt", exists)
-    //  if(exists){
-    //    setError("Хэрэглэгч бүртгэлтэй байна")
-    //  } 
-    //  else {
+
+      // const userRef = db.collection("smWebUsers").doc(selected.id) //doc(db, "smWebUsers", selected.id )
+      const userRef = doc(db, "smWebUsers", selected.id )
+      // const q1 = query(userRef, where("WebUserID", "==", WebUserID?.value))
+      // const q1 = userRef.filter(element => element.WebUserID === WebUserID?.value);
+      // const query1 = await getDocs(q1)
+      // let exists = null;
+      // query1.forEach(doc => exists = doc.data());
+      console.log(userRef)
+      // if(exists){
+      //   setError("Хэрэглэгч бүртгэлтэй байна")
+      // }  
+      // else { 
       setDoc(userRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value, WebPassword: WebPassword?.value, AppServerIP:AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value,  VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, 
       AppServerLoginUserPass:AppServerLoginUserPass?.value,  
       WebServiceURL:WebServiceURL?.value, TxnType: txnType.toString(),
-      Address:Address?.value, Email:Email?.value ,CreatedDate: CreatedDate?.value, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss')},)
+      Address:Address?.value, Email:Email?.value ,CreatedDate: CreatedDate?.value, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss')})
+
         onClose(true);
-       message.success(t('request_success'));
+       message.success(t('request_success'))
+      // }
+     
        
-    //  }
+    
       } else {
      const userCollRef= collection(db, 'smWebUsers')
      const q1 = query(userCollRef, where("WebUserID", "==", WebUserID?.value
@@ -145,7 +150,7 @@ export function Card(props){
      const query1 = await getDocs(q1)
      let exists = null;
      query1.forEach(doc => exists = doc.data());
-    //  console.log(exists)
+     console.log(exists)
      if(exists){
        setError("Хэрэглэгч бүртгэлтэй байна")
      }  

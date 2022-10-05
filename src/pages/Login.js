@@ -8,11 +8,13 @@ import { Loading } from './Loading';
 export function Login(){
   return (
     <Suspense fallback={<Loading />}>
+      <div className='login'>
       <div className='login_container'>
         <LoginImages />
         <div className='login_form'>
-          <LoginForm />
+        <LoginForm />
         </div>
+      </div>
       </div>
     </Suspense>
   )

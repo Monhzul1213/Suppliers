@@ -6,7 +6,7 @@ import {db} from '../../firebase'
 import { formatNumber } from '../../helpers';
 import '../../css/card.css';
 import moment, { isDate } from 'moment';
-import { Cardlength, CardPassword,CardPassword1, CardInput, CardInput1, CardField, CardNote, Loader, DynamicAIIcon, Error1, CardDropdown } from '../all';
+import { Cardlength,Cardlength1, CardPassword,CardPassword1, CardInput, CardInput1, CardField, CardNote, Loader, DynamicAIIcon, Error1, CardDropdown } from '../all';
 import { now } from 'lodash';
 // import { Options } from '../all/CardDropdown';
 
@@ -27,6 +27,7 @@ export function Card(props){
   const [LicenseAmt, setLicenseAmt] = useState({ value: '', error: null });
   const [WebServiceURL, setWebServiceURL] = useState({  error: null });
   const [AppServerLoginUserID, setAppServerLoginUserID] = useState({  error: null });
+  const [AppServerVersion, setAppServerVersion] = useState({  error: null });
   const [AppServerLoginUserPass, setAppServerLoginUserPass] = useState({ value: '', error: null });
   const [Phone, setPhone] = useState({ value: '', error: null });
   const [Address, setAddress] = useState({  error: null });
@@ -54,6 +55,7 @@ export function Card(props){
     setAppServerLoginUserPass({ value: selected?.AppServerLoginUserPass ?? ''  })
     setAddress({ value: selected?.Address ?? '' })
     setAppServerLoginPort({ value: selected?.AppServerLoginPort ?? '' })
+    setAppServerVersion({ value: selected?.AppServerVersion ?? '' })
     setLicenseAmt({value : disabled ? formatNumber(selected?.LicenseAmt ): (selected?.LicenseAmt ?? '') });
     setPhone({ value: selected?.Phone ?? '' });
     setCreatedDate({value: selected?.CreatedDate})
@@ -78,7 +80,7 @@ export function Card(props){
         if(option?.value == item){
           list.push(option)
         }
-        console.log(option)
+        console.log(item)  
       })
       setTxnType({ value: list })
     }
@@ -108,7 +110,8 @@ export function Card(props){
    
    
 // return;
-     if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value && WebPassword?.value &&AppServerIP?.value && checkIfValidIP(AppServerIP?.value) &&VendorCount?.value && !isNaN(VendorCount?.value) && (LicenseAmt?.value && LicenseAmt?.value !== '0') && !isNaN(text) &&WebServiceURL?.value &&AppServerLoginUserID?.value &&AppServerLoginUserPass?.value &&Phone?.value && !isNaN(Phone?.value) &&Address?.value &&AppServerLoginPort?.value &&  Email?.value && isValidEmail(Email?.value) && TxnType?.value ){
+     if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value && WebPassword?.value &&AppServerIP?.value && checkIfValidIP(AppServerIP?.value) &&VendorCount?.value && !isNaN(VendorCount?.value) //&& (LicenseAmt?.value && LicenseAmt?.value !== '0') 
+     && !isNaN(text) &&WebServiceURL?.value &&AppServerLoginUserID?.value &&AppServerLoginUserPass?.value &&Phone?.value && !isNaN(Phone?.value) &&Address?.value &&AppServerLoginPort?.value && AppServerVersion?.value&&  Email?.value && isValidEmail(Email?.value) && TxnType?.value ){
       setLoader(true);
       setError(null);
       let requests = [{
@@ -132,7 +135,7 @@ export function Card(props){
       //   setError("Хэрэглэгч бүртгэлтэй байна")
       // }  
       // else { 
-      setDoc(userRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value, WebPassword: WebPassword?.value, AppServerIP:AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value,  VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, 
+      setDoc(userRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword: WebPassword?.value, AppServerIP:AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value,  VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerVersion: AppServerVersion?.value,
       AppServerLoginUserPass:AppServerLoginUserPass?.value,  
       WebServiceURL:WebServiceURL?.value, TxnType: txnType.toString(),
       Address:Address?.value, Email:Email?.value ,CreatedDate: CreatedDate?.value, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss')})
@@ -156,7 +159,7 @@ export function Card(props){
      }  
      else {
     
-       addDoc(userCollRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value, WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: WebUserID?.value, TxnType: txnType.toString(), LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
+       addDoc(userCollRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value,AppServerVersion:AppServerVersion?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: WebUserID?.value, TxnType: txnType.toString(), LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
        onClose(true)
        message.success(t('request_success'));
      }
@@ -176,18 +179,19 @@ export function Card(props){
     if(!Phone?.value) setPhone({value: '', error: 'is_empty'});
     if(!Address?.value) setAddress({value: '', error: 'is_empty'});
     if(!AppServerLoginPort?.value) setAppServerLoginPort({value: '', error: 'is_empty'});
+    if(!AppServerIP?.value) setAppServerIP({value: '', error: 'is_empty'});
+    if(!AppServerVersion?.value) setAppServerVersion({value: '', error: 'is_empty'});
     if(!Email?.value) setEmail({value: '', error: 'is_empty'});
     if(!TxnType?.value) setTxnType({value: '', error: 'is_empty'});
-    // if(!isValidEmail(Email?.value)) setEmail({value: '', error: 'is_invalid'});
-    // if(!isValidEmail(WebUserID?.value)) setWebUserID({value: '', error: 'is_invalid'});
     else if(isNaN(text)) setVendorCount({...VendorCount, ...{error: 'must_number'}});
     else if(isNaN(Phone?.value)) setPhone({...Phone, ...{error: 'must_number'}});
     else if(isNaN(text)) setLicenseAmt({...LicenseAmt, ...{error: 'must_number'}});
     else if(isNaN(AppServerLoginPort?.value)) setAppServerLoginPort({...AppServerLoginPort, ...{error: 'must_number'}});
+    else if(!checkIfValidIP(AppServerIP?.value)) setAppServerIP({...AppServerIP, ...{error: 'is_IP'}});
     // else if(isNaN(text1)) setAppServerIP({...AppServerIP, ...{error: 'must_number'}});
    if(!isValidEmail(WebUserID?.value)) setWebUserID({...WebUserID, ...{error: 'is_invalid'}});
    if(!isValidEmail(Email?.value)) setEmail({...Email, ...{error: 'is_invalid'}});
-   if(!checkIfValidIP(AppServerIP?.value)) setAppServerIP({...AppServerIP, ...{error: 'is'}});
+   
   }
   }
 
@@ -219,6 +223,10 @@ export function Card(props){
     if(isNaN(value?.value)) setAppServerLoginPort({ value: value?.value, error: 'must_number'});
     else setAppServerLoginPort(value);
   }
+  // const changeIP = value => {
+  //   if(isNaN(value?.value)) setAppServerIP({ value: value?.value, error: 'must_number'});
+  //   else setAppServerIP(value);
+  // }
   // const changeIP = value => {
   //   let text1 = value?.value?.replace(/[0-9]/g, '');
   //   if(isNaN(text1)) setAppServerIP({ value: value?.value, error: 'must_number'});
@@ -263,11 +271,14 @@ export function Card(props){
       
       <div className='card4'>
       <Cardlength label={('table.vendorCount')}  value={VendorCount} setValue={changeVendorCount} handleEnter={handleEnter} />
-      <CardInput1 label={('table.License')}  disabled={disabled} value={LicenseAmt} setValue={changeLicense} handleEnter={handleEnter}/>
+      <CardInput1 label={('AppServer_IP')} value={AppServerIP} setValue={setAppServerIP} handleEnter={handleEnter} />
+      {/* <CardInput1 label={('table.License')}  disabled={disabled} value={LicenseAmt} setValue={changeLicense} handleEnter={handleEnter}/> */}
       </div>
       <div className='card5'>
-      <CardInput label={('AppServer_IP')} value={AppServerIP} setValue={setAppServerIP} handleEnter={handleEnter} />
-      <CardInput1 label={('AppServer_Port')}  value={AppServerLoginPort} setValue={changePort} handleEnter={handleEnter} />
+      {/* <CardInput label={('AppServer_IP')} value={AppServerIP} setValue={changeIP} handleEnter={handleEnter} /> */}
+      <Cardlength label={('AppServer_Port')}  value={AppServerLoginPort} setValue={changePort} handleEnter={handleEnter} />
+      <CardInput1 label={('AppServerversion')} value={AppServerVersion} setValue={setAppServerVersion} handleEnter={handleEnter} />
+
       </div>
     
       <div className='card6'>

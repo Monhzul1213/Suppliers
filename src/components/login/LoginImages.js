@@ -18,16 +18,16 @@ export default function LoginImages(){
       <div className='login_image_container'>
         <img src={office} alt='image_login' className='login_image' />
       </div>
-      <div className='login_slides'>
-        {/* <Swiper autoplay={{delay: 4000}} pagination={pagination} modules={[Pagination]}>
+      {/* <div className='login_slides'>
+         <Swiper autoplay={{delay: 4000}} pagination={pagination} modules={[Pagination]}>
           <SwiperSlide>
             <img src={office} alt='image_login' className='login_image' />
           </SwiperSlide>
-          <SwiperSlide> */}
+          <SwiperSlide> 
             <img src={office} alt='image_login' className='login_image' />
-          {/* </SwiperSlide>
-        </Swiper> */}
-      </div>
+          </SwiperSlide>
+        </        
+      </div> */}
     </div>
   )
 } 

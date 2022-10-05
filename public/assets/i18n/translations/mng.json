@@ -5,7 +5,8 @@
     "password": "Нууц үг",
     "logout": "Гарах",
     "link": "www.ultimate.mn",
-    "signup":"Бүртгүүлэх"
+    "signup":"Бүртгүүлэх",
+    "user":"Нэвтрэх нэр"
   },
   "copyright": "@2022 Хязгааргүй шийдэл, ХХК",
   "errors": {
@@ -17,7 +18,8 @@
     "not_zero": " 0 байж болохгүй.",
     "less_than": " = Авлага - Өглөг дүнгээс их тоо оруулах боломжгүй.",
     "must_number": " тоо байх ёстой.",
-    "more_zero": "Дүн 0-ээс бага байж болохгүй."
+    "more_zero": "Дүн 0-ээс бага байж болохгүй.",
+    "is_IP": " IP хаяг болон тоо байх ёстой"
   },
   "menu": [
     {"label": "Хэрэглэгч", "icon": "icon_customer", "link": "/customer", "hide": true},
@@ -188,6 +190,7 @@
   "AppServer_Port": "Сервэрийн порт",
   "AppServer_UserID": " Холбогдох хэрэглэгч",
   "AppServer_UserPass": " Холбогдох хэрэглэгчийн нууц үг ",
+  "AppServerversion": " UltimateERP Version",
   "txntype": "Гүйлгээний төрөл",
   "txntype_enter": "Гүйлгээний төрөл оруулна уу?"
 }

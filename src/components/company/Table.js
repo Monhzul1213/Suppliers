@@ -40,7 +40,7 @@ export const Table = (props) => {
       >
         <Input
           ref={searchInput}
-          placeholder={`Search ${dataIndex}`}
+          placeholder={`Search `}
           value={selectedKeys[0]}
           onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
           onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
@@ -132,7 +132,6 @@ export const Table = (props) => {
       // accessor: 'CpnyID' ,
       dataIndex: 'CpnyID',
       key: 'CpnyID',
-      align: 'left',
       ...getColumnSearchProps('CpnyID'),
       
     },
@@ -148,7 +147,6 @@ export const Table = (props) => {
       title: t('user_password'),
       dataIndex: 'WebPassword',
       key: 'WebPassword',
-      align: 'center',
       ...getColumnSearchProps('WebPassword'),
       // sorter: (a, b) => a.WebPassword.length - b.WebPassword.length,
       // sortDirections: ['descend', 'ascend'],
@@ -198,11 +196,11 @@ export const Table = (props) => {
       dataIndex: 'LicenseAmt',
       key: 'LicenseAmt',
       align: 'right',
-
+      marginBottom: 20,
       ...getColumnSearchProps('LicenseAmt'),
-      // sorter: (a, b) => a.LicenseAmt.length - b.LicenseAmt.length,
-      // sortDirections: ['descend', 'ascend'],
-      // accessor: 'WebPassword'
+      sorter: (a, b) => a.LicenseAmt.length - b.LicenseAmt.length,
+      sortDirections: ['descend', 'ascend'],
+      accessor: 'LicenseAmt'
     },
     {
       title: t('table.webservice'),
@@ -221,47 +219,47 @@ export const Table = (props) => {
       // sorter: (a, b) => a.TxnType.length - b.TxnType.length,
       // sortDirections: ['descend', 'ascend'],
       // accessor: 'WebPassword'
-    //  width: '5%',
-      // filters: [
-      //   {
-      //     text: 'Бараа материал : Багцлалт',
-      //     value: 'INAS',
-      //   },
-      //   {
-      //     text: 'Бараа материал : Тохируулга',
-      //     value: 'INAJ',
-      //   },
-      //   {
-      //     text: 'Бараа материал : Зарлага',
-      //     value: 'INII',
-      //   },
+    //  width: '20%',
+      filters: [
+        {
+          text: 'Бараа материал : Багцлалт',
+          value: 'INAS',
+        },
+        {
+          text: 'Бараа материал : Тохируулга',
+          value: 'INAJ',
+        },
+        {
+          text: 'Бараа материал : Зарлага',
+          value: 'INII',
+        },
         
-      //   {
-      //     text: 'Бараа материал : Тооллого',
-      //     value: 'INPI',
-      //   },
-      //   {
-      //     text: 'Бараа материал : Орлого',
-      //     value: 'INRC',
-      //   },
-      //   {
-      //     text: 'Бараа материал : Шилжүүлэг',
-      //     value: 'INTR',
-      //   },
-      //   {
-      //     text: 'Борлуулалт : Буцаалтын орлого',
-      //     value: 'PSCM',
-      //   },
-      //   {
-      //     text: 'Борлуулалт : Зарлага',
-      //     value: 'PSIN',
-      //   },
-      // ],
-      // filteredValue: filteredInfo.TxnType || null,
-      // onFilter: (value, record) => record.TxnType.includes(value),
-      // // sorter: (a, b) => a.name.length - b.name.length,
-      // // sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
-      // ellipsis: true,
+        {
+          text: 'Бараа материал : Тооллого',
+          value: 'INPI',
+        },
+        {
+          text: 'Бараа материал : Орлого',
+          value: 'INRC',
+        },
+        {
+          text: 'Бараа материал : Шилжүүлэг',
+          value: 'INTR',
+        },
+        {
+          text: 'Борлуулалт : Буцаалтын орлого',
+          value: 'PSCM',
+        },
+        {
+          text: 'Борлуулалт : Зарлага',
+          value: 'PSIN',
+        },
+      ],
+      filteredValue: filteredInfo.TxnType || null,
+      onFilter: (value, record) => record.TxnType.includes(value),
+      // sorter: (a, b) => a.name.length - b.name.length,
+      // sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
+      ellipsis: true,
     },  
      {
       title: t('AppServer_IP'),
@@ -303,6 +301,18 @@ export const Table = (props) => {
       // sortDirections: ['descend', 'ascend'],
       // accessor: 'WebPassword'
     },
+    {
+      title: t('Үүсгэсэн огноо'),
+      dataIndex: 'CreatedDate',
+      key: 'CreatedDate',
+      align: 'center',
+      ...getColumnSearchProps('CreatedDate'),
+      // sorter: (a, b) => new Date(a.CreatedDate) - new Date( b.CreatedDate),
+      // sortDirections: ['descend', 'ascend'],
+      accessor: 'CreatedDate',
+      // width: 0,
+      defaultSortOrder: "descend"
+    },
   ];
  
 
@@ -318,12 +328,9 @@ export const Table = (props) => {
       // }, // click row
       onDoubleClick: event => {
         setVisible(true)
-        // selected(rowIndex)
         setSelected(record);
-        // toggleAllRowsSelected(false);
-        // rowIndex?.toggleRowSelected();
         console.log(record)
-      }, // double click row
+      }, 
     };
   }}  />;
 };

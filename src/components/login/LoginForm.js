@@ -39,7 +39,7 @@ export default function LoginForm(){
     });
   }
 
-  const nameProps = { label: 'login.email', value: email, setValue: setEmail,handleEnter,  setError };
+  const nameProps = { label: 'login.user', value: email, setValue: setEmail,handleEnter,  setError };
   const passProps = { label: 'login.password', value: password, setValue: setPassword, setError, isPassword: true };
   
   return (
@@ -49,6 +49,7 @@ export default function LoginForm(){
         </div>
       <img src={logo2} alt='Logo' className='login_form_logo' />
       <p className='admin'>COMPANY</p>
+      
       <form onSubmit={handleSubmit} className='login_form_back'>
         <Input {...nameProps} />
         <Input {...passProps} />

@@ -5,7 +5,8 @@
     "password": "Password",
     "logout": "Log out",
     "link": "www.ultimate.mn",
-    "signup":"Sign up"
+    "signup":"Sign up",
+    "user":"Username"
   },
   "copyright": "@2022 Ultimate Solutions, LLC",
   "errors": {
@@ -17,7 +18,8 @@
     "not_zero": " can't be 0.",
     "less_than": " can't be more than Receivable - Payable.",
     "must_number": " must be number.",
-    "more_zero": "Amount can't be less than 0."
+    "more_zero": "Amount can't be less than 0.",
+    "is_IP": " IP invalid"
   },
   "menu": [
     {"label": "Customers", "icon": "icon_customer", "link": "/customer", "hide": true},
@@ -103,7 +105,7 @@
     "balance": "Balance",
     "company": "Company name",
     "password":"Password",
-    "vendorCount":"VendorCount",
+    "vendorCount":"Vendor Count",
     "usevendorCount":"Use Vendor Count",
     "License":"LicenseAmt",
     "webservice":"Web Service",
@@ -181,6 +183,7 @@
   "AppServer_Port": " Port",
   "AppServer_UserID": " UserID",
   "AppServer_UserPass": " UserPass",
+  "AppServerversion": " UltimateERP Version",
   "txntype": "Transaction type",
   "txntype_enter": "Enter the transaction type"
 }

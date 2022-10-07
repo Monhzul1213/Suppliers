@@ -1,21 +1,22 @@
 import React, { Suspense } from 'react';
 
-import '../css/login.css';
-import LoginForm from '../components/login/LoginForm';
+import '../css/login1.css';
+import LoginNew from '../components/login/LoginNew';
 import LoginImages from '../components/login/LoginImages';
 import { Loading } from './Loading';
 
 export function Login(){
   return (
     <Suspense fallback={<Loading />}>
-      <div className='login'>
+      <LoginNew/>
+      {/* <div className='login'>
       <div className='login_container'>
         <LoginImages />
         <div className='login_form'>
         <LoginForm />
         </div>
-      </div>
-      </div>
+      </div> 
+      </div>*/}
     </Suspense>
   )
 }

@@ -1,6 +1,7 @@
 export * from './DynamicIcon';
 export * from './Error';
 export * from './Error1';
+export * from './Error2';
 export * from './Loader';
 export * from './Language';
 export * from './User';

@@ -309,6 +309,7 @@ width:300px;
     width: 98%;
     /* background-color: var(--hover2-color); */
   }
+  
   .ant-modal-close{
     display: none;
   }

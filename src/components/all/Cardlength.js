@@ -16,8 +16,8 @@ export function Cardlength(props){
 
   return (
     <div className='card_input_container'>
-      <p className='card_input_label'>{t(label)}</p>
-      <input className='card_input'
+      <p className='card_input_label1'>{t(label)}</p>
+      <input className='card_input3'
         disabled={disabled}
         value={value?.value}
         onChange={onChange}

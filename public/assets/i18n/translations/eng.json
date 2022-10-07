@@ -185,5 +185,16 @@
   "AppServer_UserPass": " UserPass",
   "AppServerversion": " UltimateERP Version",
   "txntype": "Transaction type",
-  "txntype_enter": "Enter the transaction type"
+  "txntype_enter": "Enter the transaction type",
+  "visit": "Visit",
+  "terms": "Terms of service",
+  "remember": "Remember password",
+  "forgot": "Forgot password?",
+  "reset": "Reset password",
+  "send": "Send",
+  "back": "Back",
+  "sent": "We have sent password reset instructions to your email.",
+  "change": "Change password",
+  "pass_match": "The password confirmation does not match",
+  "pass_success": "Your password has been updated successfully."
 }

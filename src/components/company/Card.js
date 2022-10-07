@@ -18,6 +18,7 @@ export function Card(props){
   const [error, setError] = useState(null);
   const [loader, setLoader] = useState(false);
   const [CpnyID, setCpnyID] = useState('');
+  const [CpnyName, setCpnyName] = useState({ value: '', error: null});
   const [WebUserID, setWebUserID] = useState({ value: '', error: null });
   const [WebPassword, setWebPassword] = useState({ value: '', error: null });
   const [AppServerIP, setAppServerIP] = useState('');
@@ -44,6 +45,8 @@ export function Card(props){
   useEffect(() => {
     setEmail({ value: selected?.Email ?? '' })
     setCpnyID({ value: selected?.CpnyID ?? '' })
+    setCpnyName({ value: selected?.CpnyName ??'' });
+
     setWebUserID({ value: selected?.WebUserID ?? '' })
     setWebPassword({ value: selected?.WebPassword ?? ''   })
     setAppServerIP({ value: selected?.AppServerIP ?? '' })
@@ -110,7 +113,7 @@ export function Card(props){
    
    
 // return;
-     if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value && WebPassword?.value &&AppServerIP?.value && checkIfValidIP(AppServerIP?.value) &&VendorCount?.value && !isNaN(VendorCount?.value) //&& (LicenseAmt?.value && LicenseAmt?.value !== '0') 
+     if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value&& CpnyName?.value && WebPassword?.value &&AppServerIP?.value && checkIfValidIP(AppServerIP?.value) &&VendorCount?.value && !isNaN(VendorCount?.value) //&& (LicenseAmt?.value && LicenseAmt?.value !== '0') 
      && !isNaN(text) &&WebServiceURL?.value &&AppServerLoginUserID?.value &&AppServerLoginUserPass?.value &&Phone?.value && !isNaN(Phone?.value) &&Address?.value &&AppServerLoginPort?.value && AppServerVersion?.value&&  Email?.value && isValidEmail(Email?.value) && TxnType?.value ){
       setLoader(true);
       setError(null);
@@ -135,7 +138,7 @@ export function Card(props){
       //   setError("Хэрэглэгч бүртгэлтэй байна")
       // }  
       // else { 
-      setDoc(userRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword: WebPassword?.value, AppServerIP:AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value,  VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerVersion: AppServerVersion?.value,
+      setDoc(userRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword: WebPassword?.value, AppServerIP:AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value,  VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerVersion: AppServerVersion?.value,
       AppServerLoginUserPass:AppServerLoginUserPass?.value,  
       WebServiceURL:WebServiceURL?.value, TxnType: txnType.toString(),
       Address:Address?.value, Email:Email?.value ,CreatedDate: CreatedDate?.value, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss')})
@@ -159,7 +162,7 @@ export function Card(props){
      }  
      else {
     
-       addDoc(userCollRef, {CpnyID: CpnyID?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value,AppServerVersion:AppServerVersion?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: WebUserID?.value, TxnType: txnType.toString(), LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
+       addDoc(userCollRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value,AppServerVersion:AppServerVersion?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: WebUserID?.value, TxnType: txnType.toString(), LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
        onClose(true)
        message.success(t('request_success'));
      }
@@ -170,6 +173,7 @@ export function Card(props){
     if(!WebUserID?.value) setWebUserID({ error: 'is_empty'});
     if(!WebPassword) setWebPassword({value: '', error: 'is_empty'});
     if(!CpnyID?.value) setCpnyID({value: '', error: 'is_empty'});
+    if(!CpnyName?.value) setCpnyName({value: '', error: 'is_empty'});
     // if(!VendID?.value) setVendID({value: '', error: 'is_empty'});
     if(!VendorCount?.value) setVendorCount({value: '', error: 'is_empty'});
     if(!LicenseAmt?.value) setLicenseAmt({value: '', error: 'is_empty'});
@@ -250,41 +254,45 @@ export function Card(props){
       <form className='card_container' onSubmit={handleSubmit}>
       <div className='cart'>
         <div className='card1' >  
-      <CardInput label={('table.company')} setValue={setCpnyID} value={CpnyID} handleEnter={handleEnter}/>
-      <CardInput1 label={('user_email')}  disabled={disabled} value={WebUserID}  setValue={setWebUserID} handleEnter={handleEnter} /> 
+      <CardInput label={('print.company')} setValue={setCpnyID} value={CpnyID} handleEnter={handleEnter}/>
+      
+      <CardInput1 label={('table.company')} value={CpnyName} setValue={setCpnyName} handleEnter={handleEnter} /> 
      
       </div>
       <div className='card2'>
-      <CardPassword label={('user_password')}   value={WebPassword} setValue={setWebPassword} isPassword={true} handleEnter={handleEnter} /> 
-      <CardInput1 label={('login.email')}handleEnter={handleEnter} value={Email} setValue={setEmail}  />
+      <CardInput label={('user_email')}  disabled={disabled} value={WebUserID}  setValue={setWebUserID} handleEnter={handleEnter} />
+      <CardInput1 label={('user_password')}   value={WebPassword} setValue={setWebPassword} isPassword={true} handleEnter={handleEnter} /> 
       
       </div>
       <div className='card3'>
-      <CardInput label={('table.phone')} handleEnter={handleEnter}value={Phone} setValue={changePhone}  />
+      <CardInput label={('login.email')}handleEnter={handleEnter} value={Email} setValue={setEmail}  />
+
+      <CardInput1 label={('table.phone')} handleEnter={handleEnter}value={Phone} setValue={changePhone}  />
       
-      <CardInput1 label={('table.webservice')}  value={WebServiceURL} setValue={setWebServiceURL} handleEnter={handleEnter} />
+      </div>
+      <div className='card3'>
+      <CardInput label={('table.webservice')}  value={WebServiceURL} setValue={setWebServiceURL} handleEnter={handleEnter} />
+      <Cardlength label={('table.vendorCount')}  value={VendorCount} setValue={changeVendorCount} handleEnter={handleEnter} /> 
       </div>
       <div className='card'>
+    
       <CardDropdown label={('txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} />
       <CardNote label={('table.address')}  value={Address} setValue={setAddress} /> 
       </div>
-      
       <div className='card4'>
-      <Cardlength label={('table.vendorCount')}  value={VendorCount} setValue={changeVendorCount} handleEnter={handleEnter} />
-      <CardInput1 label={('AppServer_IP')} value={AppServerIP} setValue={setAppServerIP} handleEnter={handleEnter} />
-      {/* <CardInput1 label={('table.License')}  disabled={disabled} value={LicenseAmt} setValue={changeLicense} handleEnter={handleEnter}/> */}
+      <CardInput label={('table.License')}  disabled={disabled} value={LicenseAmt} setValue={changeLicense} handleEnter={handleEnter}/>
+      <CardInput1 label={('AppServerversion')} value={AppServerVersion} setValue={setAppServerVersion} handleEnter={handleEnter} />
       </div>
       <div className='card5'>
-      {/* <CardInput label={('AppServer_IP')} value={AppServerIP} setValue={changeIP} handleEnter={handleEnter} /> */}
+      <CardInput label={('AppServer_IP')} value={AppServerIP} setValue={setAppServerIP} handleEnter={handleEnter} />
       <Cardlength label={('AppServer_Port')}  value={AppServerLoginPort} setValue={changePort} handleEnter={handleEnter} />
-      <CardInput1 label={('AppServerversion')} value={AppServerVersion} setValue={setAppServerVersion} handleEnter={handleEnter} />
 
       </div>
     
       <div className='card6'>
       <CardInput label={('AppServer_UserID')}  value={ AppServerLoginUserID} handleEnter={handleEnter}
       setValue={setAppServerLoginUserID}/>
-      <CardPassword1 label={('AppServer_UserPass')} isPassword={true} value={AppServerLoginUserPass} handleEnter={handleEnter} setValue={setAppServerLoginUserPass} />
+      <CardInput1 label={('AppServer_UserPass')} isPassword={true} value={AppServerLoginUserPass} handleEnter={handleEnter} setValue={setAppServerLoginUserPass} />
       </div>
       {/* <div className='card'>
       <CardDropdown label={('txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} />

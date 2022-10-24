@@ -13,6 +13,7 @@ export function Header(bread){
       <img src={logo} className="menu_logo_back"/>
       <p className='menu_logo_title'>{t('cmp_list')}</p>
         <Language hideArrow={true}/>
+        {/* <p className='drop_user_vend'>ULTIMATE SOLUTIONS</p> */}
         <User/>
     </div>
   )

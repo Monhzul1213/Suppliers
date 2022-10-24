@@ -97,12 +97,12 @@ export function Card(props){
     let text = LicenseAmt?.value?.replace(/[^0-9]/g, '');
     let text1 = AppServerIP?.value?.replace(/[^0-9.]/g, '');
     
-    let txnType = [];
-    TxnType?.value?.map(item => {
-      //label, value
-      txnType.push(item?.value)
-    })
-   console.log(txnType)
+  //   let txnType = [];
+  //   TxnType?.value?.map(item => {
+  //     //label, value
+  //     txnType.push(item?.value)
+  //   })
+  //  console.log(txnType)
 
   //  let Txntype = [];
   //   txnType.map(item => {
@@ -113,8 +113,7 @@ export function Card(props){
    
    
 // return;
-     if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value&& CpnyName?.value && WebPassword?.value &&AppServerIP?.value && checkIfValidIP(AppServerIP?.value) &&VendorCount?.value && !isNaN(VendorCount?.value) //&& (LicenseAmt?.value && LicenseAmt?.value !== '0') 
-     && !isNaN(text) &&WebServiceURL?.value &&AppServerLoginUserID?.value &&AppServerLoginUserPass?.value &&Phone?.value && !isNaN(Phone?.value) &&Address?.value &&AppServerLoginPort?.value && AppServerVersion?.value&&  Email?.value && isValidEmail(Email?.value) && TxnType?.value ){
+     if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value&& CpnyName?.value && WebPassword?.value &&WebServiceURL?.value &&Phone?.value && !isNaN(Phone?.value) &&Address?.value && Email?.value && isValidEmail(Email?.value)  ){
       setLoader(true);
       setError(null);
       let requests = [{
@@ -138,9 +137,8 @@ export function Card(props){
       //   setError("Хэрэглэгч бүртгэлтэй байна")
       // }  
       // else { 
-      setDoc(userRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword: WebPassword?.value, AppServerIP:AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value, Phone:Phone?.value,  VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerVersion: AppServerVersion?.value,
-      AppServerLoginUserPass:AppServerLoginUserPass?.value,  
-      WebServiceURL:WebServiceURL?.value, TxnType: txnType.toString(),
+      setDoc(userRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword: WebPassword?.value, Phone:Phone?.value,  
+      WebServiceURL:WebServiceURL?.value, 
       Address:Address?.value, Email:Email?.value ,CreatedDate: CreatedDate?.value, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss')})
 
         onClose(true);
@@ -162,7 +160,7 @@ export function Card(props){
      }  
      else {
     
-       addDoc(userCollRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword:WebPassword?.value, AppServerIP: AppServerIP?.value, AppServerLoginPort:AppServerLoginPort?.value,AppServerVersion:AppServerVersion?.value, Phone:Phone?.value, VendorCount:VendorCount?.value , UseVendorCount: UseVendorCount?.value, LicenseAmt:LicenseAmt?.value,  AppServerLoginUserID:AppServerLoginUserID?.value, AppServerLoginUserPass:AppServerLoginUserPass?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '), CreatedUserName: WebUserID?.value, TxnType: txnType.toString(), LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
+       addDoc(userCollRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword:WebPassword?.value, Phone:Phone?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '),  LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
        onClose(true)
        message.success(t('request_success'));
      }
@@ -249,7 +247,7 @@ export function Card(props){
     <Modal title={null} footer={null} closable={false} visible={visible} 
      width={700}> 
      <DynamicAIIcon name='AiFillCloseCircle' className='close_icon' onClick={() => onClose(false)} />
-      <p className='card_title'>{t('new_cmp')}</p>
+      <p className='card_title'>{t('new_vendor')}</p>
       {error ? <Error1 error={error} /> : null}
       <form className='card_container' onSubmit={handleSubmit}>
       <div className='cart'>
@@ -276,27 +274,13 @@ export function Card(props){
       </div>
       <div className='card'>
     
-      <CardDropdown label={('txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} />
+      {/* <CardDropdown label={('txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} /> */}
       <CardNote label={('table.address')}  value={Address} setValue={setAddress} /> 
       </div>
-      <div className='card4'>
+      {/* <div className='card4'>
       <CardInput label={('table.License')}  disabled={disabled} value={LicenseAmt} setValue={changeLicense} handleEnter={handleEnter}/>
-      <CardInput1 label={('AppServerversion')} value={AppServerVersion} setValue={setAppServerVersion} handleEnter={handleEnter} />
-      </div>
-      <div className='card5'>
-      <CardInput label={('AppServer_IP')} value={AppServerIP} setValue={setAppServerIP} handleEnter={handleEnter} />
-      <Cardlength label={('AppServer_Port')}  value={AppServerLoginPort} setValue={changePort} handleEnter={handleEnter} />
-
-      </div>
-    
-      <div className='card6'>
-      <CardInput label={('AppServer_UserID')}  value={ AppServerLoginUserID} handleEnter={handleEnter}
-      setValue={setAppServerLoginUserID}/>
-      <CardInput1 label={('AppServer_UserPass')} isPassword={true} value={AppServerLoginUserPass} handleEnter={handleEnter} setValue={setAppServerLoginUserPass} />
-      </div>
-      {/* <div className='card'>
-      <CardDropdown label={('txntype')}  value={TxnType} handleEnter={handleEnter} setValue={setTxnType} />
       </div> */}
+      
      
       </div>
       {!disabled && <button type='submit' disabled={loader} className='login_form_btn'>

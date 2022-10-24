@@ -13,16 +13,16 @@ export const config1 = {//test
     domain: "http://192.168.1.133:3000",
   }
   export const config = {//production
-    firebaseConfig: {
-      apiKey: "AIzaSyDoHFNtze2u01yMB2HH7-N76s_1fX3kGrg",
-      authDomain: "ultimatevendorweb.firebaseapp.com",
-      projectId: "ultimatevendorweb",
-      storageBucket: "ultimatevendorweb.appspot.com",
-      messagingSenderId: "38110257902",
-      appId: "1:38110257902:web:5f825e30bf2f2d6e0309ff",
-      measurementId: "G-4QZQVDV9XH"
+    firebaseConfig : {
+      apiKey: "AIzaSyDQiZMuI583j5Q__iojsuORCRMNR-aXTag",
+      authDomain: "diplomweb.firebaseapp.com",
+      projectId: "diplomweb",
+      storageBucket: "diplomweb.appspot.com",
+      messagingSenderId: "171656730942",
+      appId: "1:171656730942:web:cf148f1eec2492efacb46f",
+      measurementId: "G-102NY0EKMG"
     },
     api_url: "http://202.131.232.101:3737/VendorSystem.asmx/",
     version: "",
-    domain: "http://vendor.ultimate.mn",
+    domain: "http://vendor.ultimate.mn/company/",
   }

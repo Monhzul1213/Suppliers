@@ -11,7 +11,7 @@ export function AddButton(props){
       <IconButton
         className='add_'
         icon='AiOutlinePlus'
-        label={addLabel ?? 'new_cmp'}
+        label={addLabel ?? 'new_vendor'}
         onClick={onClick} />
       <button className='fab_btn' onClick={onClick}>
         <DynamicAIIcon className='add_icon' name='AiOutlinePlus' />

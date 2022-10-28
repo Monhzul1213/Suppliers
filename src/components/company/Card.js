@@ -113,7 +113,7 @@ export function Card(props){
    
    
 // return;
-     if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value&& CpnyName?.value && WebPassword?.value &&WebServiceURL?.value &&Phone?.value && !isNaN(Phone?.value) &&Address?.value && Email?.value && isValidEmail(Email?.value)  ){
+     if(WebUserID?.value && isValidEmail(WebUserID?.value) && CpnyID?.value&& CpnyName?.value && WebPassword?.value &&WebServiceURL?.value &&Phone?.value && !isNaN(Phone?.value) &&Address?.value && Email?.value && isValidEmail(Email?.value) && VendorCount?.value  ){
       setLoader(true);
       setError(null);
       let requests = [{
@@ -138,7 +138,7 @@ export function Card(props){
       // }  
       // else { 
       setDoc(userRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword: WebPassword?.value, Phone:Phone?.value,  
-      WebServiceURL:WebServiceURL?.value, 
+      WebServiceURL:WebServiceURL?.value, VendorCount: VendorCount?.value,
       Address:Address?.value, Email:Email?.value ,CreatedDate: CreatedDate?.value, LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss')})
 
         onClose(true);
@@ -160,7 +160,7 @@ export function Card(props){
      }  
      else {
     
-       addDoc(userCollRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword:WebPassword?.value, Phone:Phone?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '),  LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
+       addDoc(userCollRef, {CpnyID: CpnyID?.value ,CpnyName: CpnyName?.value, WebUserID:WebUserID?.value.toLowerCase(), WebPassword:WebPassword?.value, Phone:Phone?.value, VendorCount: VendorCount?.value,  WebServiceURL:WebServiceURL?.value, Address:Address?.value, Email:Email?.value, CreatedDate: moment().format('yyyy.MM.DD, HH:mm:ss '),  LastUserName: Email?.value, LastUpdate:  moment().format('yyyy.MM.DD, HH:mm:ss ')} )
        onClose(true)
        message.success(t('request_success'));
      }

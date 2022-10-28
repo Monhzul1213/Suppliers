@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Error } from './Error';
+import { Error1 } from './Error1';
 
 export function Cardlength(props){
   const { label, value, setValue, handleEnter, disabled, id, vLabel } = props;
@@ -23,7 +23,7 @@ export function Cardlength(props){
         onChange={onChange}
         onKeyDown={onKeyDown} 
         maxLength={6}/>
-      {value?.error ? <Error label={label} error={value?.error} fromForm={true} /> : null}
+      {value?.error ? <Error1 label={label} error={value?.error} fromForm={true} /> : null}
     </div>
   )
 }

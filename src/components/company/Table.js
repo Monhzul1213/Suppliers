@@ -170,6 +170,7 @@ export const Table = (props) => {
     //   // accessor: 'WebPassword'
       
     // },
+
     {
       title: t('table.phone'),
       dataIndex: 'Phone',
@@ -198,96 +199,16 @@ export const Table = (props) => {
       // sortDirections: ['descend', 'ascend'],
       // accessor: 'WebPassword'
     },
-    // {
-    //   title: t('txntype'),
-    //   dataIndex: 'TxnType',
-    //   key: 'TxnType',
-    //   // ...getColumnSearchProps('TxnType'),
-    //   // sorter: (a, b) => a.TxnType.length - b.TxnType.length,
-    //   // sortDirections: ['descend', 'ascend'],
-    //   // accessor: 'WebPassword'
-    // //  width: '20%',
-    //   filters: [
-    //     {
-    //       text: 'Бараа материал : Багцлалт',
-    //       value: 'INAS',
-    //     },
-    //     {
-    //       text: 'Бараа материал : Тохируулга',
-    //       value: 'INAJ',
-    //     },
-    //     {
-    //       text: 'Бараа материал : Зарлага',
-    //       value: 'INII',
-    //     },
-        
-    //     {
-    //       text: 'Бараа материал : Тооллого',
-    //       value: 'INPI',
-    //     },
-    //     {
-    //       text: 'Бараа материал : Орлого',
-    //       value: 'INRC',
-    //     },
-    //     {
-    //       text: 'Бараа материал : Шилжүүлэг',
-    //       value: 'INTR',
-    //     },
-    //     {
-    //       text: 'Борлуулалт : Буцаалтын орлого',
-    //       value: 'PSCM',
-    //     },
-    //     {
-    //       text: 'Борлуулалт : Зарлага',
-    //       value: 'PSIN',
-    //     },
-    //   ],
-    //   filteredValue: filteredInfo.TxnType || null,
-    //   onFilter: (value, record) => record.TxnType.includes(value),
-    //   // sorter: (a, b) => a.name.length - b.name.length,
-    //   // sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
-    //   ellipsis: true,
-    // },  
-    //  {
-    //   title: t('AppServer_IP'),
-    //   dataIndex: 'AppServerIP',
-    //   key: 'AppServerIP',
-    //   align: 'center',
-    //   ...getColumnSearchProps('AppServerIP'),
-    //   // sorter: (a, b) => a.AppServerIP.length - b.AppServerIP.length,
-    //   // sortDirections: ['descend', 'ascend'],
-    //   // accessor: 'WebPassword'
-    // },
-    // {
-    //   title: t('AppServer_Port'),
-    //   dataIndex: 'AppServerLoginPort',
-    //   key: 'AppServerLoginPort',
-    //   align: 'center',
-
-    //   ...getColumnSearchProps('AppServerLoginPort'),
-    //   // sorter: (a, b) => a.AppServerLoginPort.length - b.AppServerLoginPort.length,
-    //   // sortDirections: ['descend', 'ascend'],
-    //   // accessor: 'WebPassword'
-    // },
-    // {
-    //   title: t('AppServer_UserID'),
-    //   dataIndex: 'AppServerLoginUserID',
-    //   key: 'AppServerLoginUserID',
-    //   ...getColumnSearchProps('AppServerLoginUserID'),
-    //   // sorter: (a, b) => a.AppServerLoginUserID.length - b.AppServerLoginUserID.length,
-    //   // sortDirections: ['descend', 'ascend'],
-    //   // accessor: 'WebPassword'
-    // },
-    // {
-    //   title: t('AppServer_UserPass'),
-    //   dataIndex: 'AppServerLoginUserPass',
-    //   key: 'AppServerLoginUserPass',
-    //   ...getColumnSearchProps('AppServerLoginUserPass'),
-      
-    //   // sorter: (a, b) => a.AppServerLoginUserPass.length - b.AppServerLoginUserPass.length,
-    //   // sortDirections: ['descend', 'ascend'],
-    //   // accessor: 'WebPassword'
-    // },
+    {
+      title: t('table.vendorCount'),
+      dataIndex: 'VendorCount',
+      key: 'VendorCount',
+      align: 'center',
+      ...getColumnSearchProps('VendorCount'),
+      // sorter: (a, b) => a.VendorCount.length - b.VendorCount.length,
+      // sortDirections: ['descend', 'ascend'],
+      // accessor: 'WebPassword'
+    }, 
     {
       title: t('Үүсгэсэн огноо'),
       dataIndex: 'CreatedDate',
@@ -308,11 +229,6 @@ export const Table = (props) => {
  
   onRow={(record, rowIndex) => {
     return {
-      // onClick: event => {
-      //   setVisible(true)
-      //   setSelected(rowIndex?.original);
-        
-      // }, // click row
       onDoubleClick: event => {
         setVisible(true)
         setSelected(record);
